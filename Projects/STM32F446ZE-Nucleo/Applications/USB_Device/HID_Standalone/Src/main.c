@@ -35,7 +35,7 @@
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 USBD_HandleTypeDef USBD_Device;
-uint8_t HID_Buffer[4];
+uint8_t HID_Buffer[8];
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
@@ -83,7 +83,7 @@ int main(void)
     BSP_LED_Toggle(LED3);
     HAL_Delay(100);  
     GetPointerData(HID_Buffer);
-    USBD_HID_SendReport(&USBD_Device, HID_Buffer, 4);
+    USBD_HID_SendReport(&USBD_Device, HID_Buffer, 8);
   }
 }
 
@@ -105,10 +105,11 @@ static void GetPointerData(uint8_t *pbuf)
   {
     x = -CURSOR_STEP;
   }
-  pbuf[0] = 0;
+  /*pbuf[0] = 0;
   pbuf[1] = x;
   pbuf[2] = y;
-  pbuf[3] = 0;
+  pbuf[3] = 0;*/
+  pbuf[2] = 6;
 }
 
 
