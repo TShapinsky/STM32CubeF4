@@ -75,7 +75,7 @@ int main(void)
   
   while (1)
   {
-    HAL_Delay(100);
+    HAL_Delay(50);
     
     /* Toggle LEDs  */
     BSP_LED_Toggle(LED1);
@@ -95,21 +95,38 @@ int main(void)
 static void GetPointerData(uint8_t *pbuf)
 {
   static int8_t cnt = 0;
-  int8_t  x = 0, y = 0 ;
+  int8_t  x = 0;
+  cnt++;
   
-  if(cnt++ > 0)
+  if(cnt % 12 == 2)
   {
-    x = CURSOR_STEP;
+    x = 7;
+  }
+  else if(cnt % 12 == 4)
+  {
+    x = 4;
+  }
+  else if(cnt % 12 == 6)
+  {
+    x = 7;
+  }
+  else if(cnt % 12 == 8)
+  {
+    x = 7;
+  }
+  else if(cnt % 12 == 10)
+  {
+    x = 28;
+  }
+  else if(cnt % 12 == 0)
+  {
+	x = 44;
   }
   else
   {
-    x = -CURSOR_STEP;
+	x = 0;
   }
-  /*pbuf[0] = 0;
-  pbuf[1] = x;
-  pbuf[2] = y;
-  pbuf[3] = 0;*/
-  pbuf[2] = 6;
+  pbuf[2] = x;
 }
 
 
