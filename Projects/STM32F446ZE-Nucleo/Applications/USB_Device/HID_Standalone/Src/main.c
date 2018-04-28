@@ -62,8 +62,10 @@ int main(void)
   BSP_LED_Init(LED3);
   
   /* Configure user button for remote wakeup */
-  BSP_PB_Init(BUTTON_USER, BUTTON_MODE_EXTI);
+  //BSP_PB_Init(BUTTON_USER, BUTTON_MODE_EXTI);
   
+  BSP_PB_Init(BUTTON_USER, BUTTON_MODE_GPIO);
+
   /* Init Device Library */
   USBD_Init(&USBD_Device, &HID_Desc, 0);
   
@@ -105,9 +107,9 @@ static void GetPointerData(uint8_t *pbuf)
   {
     x = -CURSOR_STEP;
   }
-  pbuf[0] = 0;
-  pbuf[1] = x;
-  pbuf[2] = y;
+  pbuf[0] = BSP_PB_GetState(BUTTON_USER);
+  pbuf[1] = 0;
+  pbuf[2] = 0;
   pbuf[3] = 0;
 }
 
